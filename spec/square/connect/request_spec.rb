@@ -28,7 +28,7 @@ describe Square::Connect::Request do
   describe 'uri' do
     let(:url) { request.uri(path: path).to_s }
 
-    specify { expect(url).to eq "https://connect.squareup.com/v1/LOCATION/PATH" }
+    specify { expect(url).to eq "#{Square::Connect::Request::BASE_URL}/LOCATION/PATH" }
 
     context 'with missing path' do
       let(:path) { nil }

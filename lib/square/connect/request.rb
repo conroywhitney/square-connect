@@ -1,7 +1,7 @@
 module Square
   module Connect
     class Request
-      BASE_URL = 'https://connect.squareup.com/v1/'
+      BASE_URL = 'https://connect.squareup.com/v1'
 
       def initialize(api:)
         fail 'Missing API' unless api
@@ -29,7 +29,7 @@ module Square
         fail 'Missing path' if path.nil?
         fail 'Path must be relative and begin with a /' unless path.start_with? '/'
 
-        URI.parse(BASE_URL + api.location + path)
+        URI.parse(BASE_URL + '/' + api.location + path)
       end
 
       private
