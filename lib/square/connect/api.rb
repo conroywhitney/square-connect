@@ -1,8 +1,9 @@
 module Square
   module Connect
     class Api
-      def initialize(access_token:)
+      def initialize(access_token:, location:)
         @access_token = access_token
+        @location = location
       end
 
       def items
@@ -12,7 +13,7 @@ module Square
 
       private
 
-      attr_reader :access_token
+      attr_reader :access_token, :location
     end
   end
 end
