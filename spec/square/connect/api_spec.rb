@@ -24,4 +24,11 @@ describe Square::Connect::Api do
       specify { expect { api }.to raise_exception RuntimeError }
     end
   end
+
+  describe 'items' do
+    let(:response) { api.items }
+    let(:status) { response['status'] }
+
+    specify { expect(status).to eq "OK" }
+  end
 end
