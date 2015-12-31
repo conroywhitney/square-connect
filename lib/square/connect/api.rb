@@ -1,7 +1,12 @@
 module Square
   module Connect
     class Api
+      attr_reader :access_token, :location
+
       def initialize(access_token:, location:)
+        fail 'Missing access token' if access_token.nil?
+        fail 'Missing location' if location.nil?
+
         @access_token = access_token
         @location = location
       end
@@ -13,14 +18,8 @@ module Square
       private
 
       def get(path)
-        Square::Connect::Request.get(
-          access_token: access_token,
-          location: location,
-          path: path
-        )
+        Square::Connect::Request.new(api: self).get(path: path)
       end
-
-      attr_reader :access_token, :location
     end
   end
 end

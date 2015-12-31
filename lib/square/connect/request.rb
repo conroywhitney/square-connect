@@ -3,13 +3,19 @@ module Square
     class Request
       BASE_URL = 'https://connect.squareup.com/v1/'
 
-      def self.get(access_token:, location:, path:)
+      def initialize(api:)
+        fail 'Missing API' unless api
+
+        @api = api
+      end
+
+      def get(path:)
         result = nil
-        uri = Square::Connect::Request.uri(location: location, path: path)
+        uri = uri(path: path)
 
         Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
           request = Net::HTTP::Get.new uri
-          request['Authorization'] = "Bearer #{access_token}"
+          request['Authorization'] = "Bearer #{api.access_token}"
 
           response = http.request request # Net::HTTPResponse object
 
@@ -19,13 +25,16 @@ module Square
         result
       end
 
-      def self.uri(location:, path:)
-        fail 'Missing location' if location.nil?
+      def uri(path:)
         fail 'Missing path' if path.nil?
         fail 'Path must be relative and begin with a /' unless path.start_with? '/'
 
-        URI.parse(BASE_URL + location + path)
+        URI.parse(BASE_URL + api.location + path)
       end
+
+      private
+
+      attr_reader :api
     end
   end
 end

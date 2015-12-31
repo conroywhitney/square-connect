@@ -5,5 +5,23 @@ describe Square::Connect::Api do
   let(:access_token) { "ACCESS_TOKEN" }
   let(:location) { "LOCATION" }
 
-  specify { expect(api).to be_truthy }
+  describe 'constructor' do
+    specify { expect(api).to be_truthy }
+
+    specify { expect(api.access_token).to eq "ACCESS_TOKEN" }
+
+    specify { expect(api.location).to eq "LOCATION" }
+
+    context 'with missing access token' do
+      let(:access_token) { nil }
+
+      specify { expect { api }.to raise_exception RuntimeError }
+    end
+
+    context 'with missing location' do
+      let(:location) { nil }
+
+      specify { expect { api }.to raise_exception RuntimeError }
+    end
+  end
 end
