@@ -1,3 +1,5 @@
+[![Travis CI](https://img.shields.io/travis/conroywhitney/square-connect.svg)](https://travis-ci.org/conroywhitney/square-connect)  [![Coveralls](https://coveralls.io/repos/conroywhitney/square-connect/badge.svg?branch=master&service=github)](https://coveralls.io/github/conroywhitney/square-connect?branch=master)  [![Code Climate](https://codeclimate.com/github/conroywhitney/square-connect/badges/gpa.svg)](https://codeclimate.com/github/conroywhitney/square-connect)
+
 # Square::Connect
 
 Use the [Square Connect API](https://docs.connect.squareup.com/api/connect/v1/) to fetch information about store itemsm
