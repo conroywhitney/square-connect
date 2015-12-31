@@ -7,11 +7,18 @@ module Square
       end
 
       def items
-        authorize(Square::Connect::Request.new)
-        request.get("/v1/#{location}/items")
+        get('/items')
       end
 
       private
+
+      def get(path)
+        Square::Connect::Request.get(
+          access_token: access_token,
+          location: location,
+          path: path
+        )
+      end
 
       attr_reader :access_token, :location
     end
