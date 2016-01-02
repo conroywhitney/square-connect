@@ -1,0 +1,29 @@
+[{
+	"fees": [],
+	"variations": [{
+		"inventory_alert_type": "NONE",
+		"track_inventory": false,
+		"pricing_type": "FIXED_PRICING",
+		"id": "27b75312-b191-11e5-bf7f-feff819cdc9f",
+		"name": "Test Item",
+		"price_money": {
+			"currency_code": "USD",
+			"amount": 1234
+		},
+		"sku": "",
+		"ordinal": 0,
+		"item_id": "36ffce44-b191-11e5-bf7f-feff819cdc9f"
+	}],
+	"available_for_pickup": false,
+	"available_online": false,
+	"visibility": "PRIVATE",
+	"id": "36ffce44-b191-11e5-bf7f-feff819cdc9f",
+	"description": "This is an example item that will be returned with the items.json fixture",
+	"name": "Example Item",
+	"category_id": "5e0e6928-b191-11e5-bf7f-feff819cdc9f",
+	"category": {
+		"id": "5e0e6928-b191-11e5-bf7f-feff819cdc9f",
+		"name": "Rspec Fixtures"
+	},
+	"type": "NORMAL"
+}]

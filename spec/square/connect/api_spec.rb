@@ -5,13 +5,19 @@ describe Square::Connect::Api do
   let(:access_token) { "ACCESS_TOKEN" }
   let(:location) { "LOCATION" }
 
-  describe 'constructor' do
+  context 'minimum viable object' do
     specify { expect(api).to be_truthy }
+  end
 
+  describe 'access_token' do
     specify { expect(api.access_token).to eq "ACCESS_TOKEN" }
+  end
 
+  describe 'location' do
     specify { expect(api.location).to eq "LOCATION" }
+  end
 
+  describe 'initialization' do
     context 'with missing access token' do
       let(:access_token) { nil }
 
@@ -27,8 +33,7 @@ describe Square::Connect::Api do
 
   describe 'items' do
     let(:response) { api.items }
-    let(:status) { response['status'] }
 
-    specify { expect(status).to eq "OK" }
+    specify { expect(response).to be_ok }
   end
 end

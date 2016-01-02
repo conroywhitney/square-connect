@@ -6,11 +6,13 @@ describe Square::Connect::Request do
   let(:api) { Square::Connect::Api.new(access_token: access_token, location: location) }
   let(:access_token) { "ACCESS_TOKEN" }
   let(:location) { "LOCATION" }
-  let(:path) { "/PATH" }
+  let(:path) { "/DUMMY" }
+
+  context 'minimum viable object' do
+    specify { expect(request).to be_truthy }
+  end
 
   describe 'constructor' do
-    specify { expect(request).to be_truthy }
-
     context 'with missing api' do
       let(:api) { nil }
 
@@ -20,15 +22,14 @@ describe Square::Connect::Request do
 
   describe 'get' do
     let(:response) { request.get(path: path) }
-    let(:status) { response['status'] }
 
-    specify { expect(status).to eq "OK" }
+    specify { expect(response).to be_ok }
   end
 
   describe 'uri' do
     let(:url) { request.uri(path: path).to_s }
 
-    specify { expect(url).to eq "#{Square::Connect::Request::BASE_URL}/LOCATION/PATH" }
+    specify { expect(url).to eq "#{Square::Connect::Request::BASE_URL}/LOCATION/DUMMY" }
 
     context 'with missing path' do
       let(:path) { nil }

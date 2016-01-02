@@ -1,8 +1,19 @@
 require 'sinatra/base'
+require 'sinatra/namespace'
 
 class FakeSquareConnectApi < Sinatra::Base
-  get '*' do
-    json_response 200, 'ok.json'
+  register Sinatra::Namespace
+
+  namespace '/v1' do
+    namespace '/:location' do
+      get '/DUMMY' do
+        json_response 200, 'dummy.json'
+      end
+
+      get '/items' do
+        json_response 200, 'items.json'
+      end
+    end
   end
 
   private
