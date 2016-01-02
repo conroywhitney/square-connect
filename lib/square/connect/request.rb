@@ -10,19 +10,17 @@ module Square
       end
 
       def get(path:)
-        result = nil
+        http_response = nil
         uri = uri(path: path)
 
         Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
           request = Net::HTTP::Get.new uri
           request['Authorization'] = "Bearer #{api.access_token}"
 
-          response = http.request request # Net::HTTPResponse object
-
-          result = JSON.parse(response.body)
+          http_response = http.request request # Net::HTTPResponse object
         end
 
-        result
+        Square::Connect::Response.new(http_response: http_response)
       end
 
       def uri(path:)
