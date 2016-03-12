@@ -33,7 +33,7 @@ module Square
           @visibility = item['visibility']
           @available_online = item['available_online']
           @available_for_pickup = item['available_for_pickup']
-          @master_image = item['master_image']
+          @master_image = parse_item_image(item['master_image'])
           @category_id = item['category_id']
           @category = parse_category(item['category'])
           @variations = parse_variations(item['variations'])
@@ -42,6 +42,10 @@ module Square
         end
 
         private
+
+        def parse_item_image(item_image)
+          item_image ? Square::Connect::Resource::ItemImage.new(item_image) : nil
+        end
 
         def parse_category(category)
           category ? Square::Connect::Resource::Category.new(category) : nil

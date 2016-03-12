@@ -34,7 +34,7 @@ RSpec.describe Square::Connect::Resource::Item do
     it { expect(item.visibility).to eq 'ITEM VISIBILITY' }
     it { expect(item.available_online).to eq 'ITEM ONLINE' }
     it { expect(item.available_for_pickup).to eq 'ITEM PICKUP' }
-    it { expect(item.master_image).to eq 'ITEM MASTER IMAGE' }
+    it { expect(item.master_image).to be_a(Square::Connect::Resource::ItemImage) }
     it { expect(item.category_id).to eq 'ITEM CATEGORY ID' }
     it { expect(item.category).to be_a(Square::Connect::Resource::Category) }
     it { expect(item.variations).to be_an(Array) }
@@ -45,6 +45,13 @@ RSpec.describe Square::Connect::Resource::Item do
       let(:response_item) { nil }
 
       it { expect { subject }.to raise_error ArgumentError, 'Error parsing Item from nil' }
+    end
+
+    context 'does not try to create an item image when the response does not contain one' do
+      let(:master_image) { nil }
+
+      it { expect { item }.to_not raise_error }
+      it { expect(item.master_image).to be_nil }
     end
 
     context 'does not try to create a category when the response does not contain one' do
