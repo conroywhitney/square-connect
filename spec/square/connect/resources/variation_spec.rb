@@ -3,17 +3,17 @@ RSpec.describe Square::Connect::Resource::Variation do
   let(:response_variation) do
     {
       'inventory_alert_type' => 'VARIATION INVENTORY ALERT TYPE',
-  		'track_inventory' => 'VARIATION TRACK INVENTORY',
-  		'pricing_type' => 'VARIATION PRICING TYPE',
-  		'id' => 'VARIATION ID',
-  		'name' => 'VARIATION NAME',
-  		'price_money' => {
-  			'currency_code' => 'USD',
-  			'amount' => '12345'
-  		},
-  		'sku' => 'VARIATION SKU',
-  		'ordinal' => 'VARIATION ORDINAL',
-  		'item_id' => 'VARIATION ITEM ID'
+      'track_inventory' => 'VARIATION TRACK INVENTORY',
+      'pricing_type' => 'VARIATION PRICING TYPE',
+      'id' => 'VARIATION ID',
+      'name' => 'VARIATION NAME',
+      'price_money' => {
+        'currency_code' => 'USD',
+        'amount' => '12345'
+      },
+      'sku' => 'VARIATION SKU',
+      'ordinal' => 'VARIATION ORDINAL',
+      'item_id' => 'VARIATION ITEM ID'
     }
   end
 
