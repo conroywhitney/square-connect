@@ -1,0 +1,40 @@
+{
+	"images": [{
+		"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+		"url": "http://www.example.com/item_image_01.jpg"
+	}, {
+		"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+		"url": "http://www.example.com/item_image_02.jpg"
+	}],
+	"fees": [],
+	"modifier_lists": [],
+	"variations": [{
+		"inventory_alert_type": "NONE",
+		"track_inventory": false,
+		"pricing_type": "FIXED_PRICING",
+		"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+		"name": "Comice Pears - 2 lb",
+		"price_money": {
+			"currency_code": "USD",
+			"amount": 250
+		},
+		"sku": "",
+		"ordinal": 0,
+		"item_id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66"
+	}],
+	"available_for_pickup": false,
+	"available_online": false,
+	"visibility": "PRIVATE",
+	"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+	"name": "Item Name",
+	"category_id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+	"category": {
+		"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+		"name": "Category"
+	},
+	"master_image": {
+		"id": "e7a23c74-e8a4-11e5-9ce9-5e5517507c66",
+		"url": "http://www.example.com/master_image.jpg"
+	},
+	"type": "NORMAL"
+}

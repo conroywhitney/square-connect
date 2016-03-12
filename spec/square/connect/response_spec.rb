@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Square::Connect::Response do
-  subject(:response) { described_class.new(http_response: http_response, resource: resource) }
+  subject(:response) do
+    described_class.new(http_response: http_response, resource_class: resource_class)
+  end
 
-  let(:http_response) { double(Net::HTTPOK, code: 200, body: response_body) }
-  let(:response_body) { '' }
-  let(:resource)      { double }
+  let(:http_response)  { double(Net::HTTPOK, code: 200, body: response_body) }
+  let(:response_body)  { '' }
+  let(:resource_class) { double }
 
   context 'minimum viable object' do
     specify { expect(response).to be_truthy }
@@ -63,27 +65,43 @@ describe Square::Connect::Response do
     end
   end
 
-  describe 'resources' do
+  describe 'resource_list' do
     let(:response_body) { '[{ "foo": true }, { "bar": false }]' }
 
-    before { allow(resource).to receive(:new).and_return(double) }
+    before { allow(resource_class).to receive(:new).and_return(double) }
 
     it 'returns an array' do
-      expect(response.resources.is_a? Array).to eq true
+      expect(response.resource_list.is_a? Array).to eq true
     end
 
     it 'has the expected number of elements in it' do
-      expect(response.resources.size).to eq 2
+      expect(response.resource_list.size).to eq 2
     end
 
     it 'contains elements of resource type' do
-      expect(response.resources.map { |r| r.class.name }.uniq).to eq [resource.class.name]
+      expect(response.resource_list.map { |r| r.class.name }.uniq).to eq [resource_class.class.name]
     end
 
     context 'when invalid request' do
       let(:http_response) { double(Net::HTTPUnauthorized, code: 401, body: response_body) }
 
-      specify { expect(response.resources).to be_nil }
+      specify { expect(response.resource_list).to be_nil }
+    end
+  end
+
+  describe 'resource' do
+    let(:response_body) { '{ "foo": true, "bar": false }' }
+
+    before { allow(resource_class).to receive(:new).and_return(double) }
+
+    it 'returns a single object' do
+      expect(response.resource).to be_a(RSpec::Mocks::Double)
+    end
+
+    context 'when invalid request' do
+      let(:http_response) { double(Net::HTTPUnauthorized, code: 401, body: response_body) }
+
+      specify { expect(response.resource).to be_nil }
     end
   end
 end

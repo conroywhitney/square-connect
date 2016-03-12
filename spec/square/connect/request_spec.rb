@@ -4,10 +4,10 @@ describe Square::Connect::Request do
   subject(:request) { described_class.new(api: api) }
 
   let(:api) { Square::Connect::Api.new(access_token: access_token, location: location) }
-  let(:access_token) { "ACCESS_TOKEN" }
-  let(:location) { "LOCATION" }
-  let(:path) { "/DUMMY" }
-  let(:resource) { double }
+  let(:access_token)   { "ACCESS_TOKEN" }
+  let(:location)       { "LOCATION" }
+  let(:path)           { "/DUMMY" }
+  let(:resource_class) { double }
 
   context 'minimum viable object' do
     specify { expect(request).to be_truthy }
@@ -22,7 +22,7 @@ describe Square::Connect::Request do
   end
 
   describe 'get' do
-    let(:response) { request.get(path: path, resource: resource) }
+    let(:response) { request.get(path: path, resource_class: resource_class) }
 
     specify { expect(response).to be_ok }
   end

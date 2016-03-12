@@ -15,6 +15,7 @@ module Square
           :available_online,
           :available_for_pickup,
           :master_image,
+          :images, # the docs don't show this, but it comes back from the API
           :category_id,
           :category,
           :variations,
@@ -34,6 +35,7 @@ module Square
           @available_online = item['available_online']
           @available_for_pickup = item['available_for_pickup']
           @master_image = parse_item_image(item['master_image'])
+          @images = parse_item_images(item['images'])
           @category_id = item['category_id']
           @category = parse_category(item['category'])
           @variations = parse_variations(item['variations'])
@@ -42,6 +44,10 @@ module Square
         end
 
         private
+
+        def parse_item_images(item_images)
+          item_images ? item_images.map(&method(:parse_item_image)).compact : []
+        end
 
         def parse_item_image(item_image)
           item_image ? Square::Connect::Resource::ItemImage.new(item_image) : nil
@@ -52,7 +58,7 @@ module Square
         end
 
         def parse_variations(variations)
-          variations.map(&method(:parse_variation)).compact
+          variations ? variations.map(&method(:parse_variation)).compact : []
         end
 
         def parse_variation(variation)

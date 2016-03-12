@@ -2,6 +2,7 @@ RSpec.describe Square::Connect::Resource::Item do
   subject(:item)     { described_class.new(response_item) }
 
   let(:master_image) { 'ITEM MASTER IMAGE' }
+  let(:images)       { ['ITEM IMAGE 1', 'ITEM IMAGE 2'] }
   let(:variations)   { ['ITEM VARIATION 1', 'ITEM VARIATION 2'] }
   let(:category)     { 'ITEM CATEGORY' }
   let(:response_item) do
@@ -16,6 +17,7 @@ RSpec.describe Square::Connect::Resource::Item do
       'available_online' => 'ITEM ONLINE',
       'available_for_pickup' => 'ITEM PICKUP',
       'master_image' => master_image,
+      'images' => images,
       'category_id' => 'ITEM CATEGORY ID',
       'category' => category,
       'variations' => variations,
@@ -35,6 +37,8 @@ RSpec.describe Square::Connect::Resource::Item do
     it { expect(item.available_online).to eq 'ITEM ONLINE' }
     it { expect(item.available_for_pickup).to eq 'ITEM PICKUP' }
     it { expect(item.master_image).to be_a(Square::Connect::Resource::ItemImage) }
+    it { expect(item.images).to be_a(Array) }
+    it { expect(item.images.first).to be_a(Square::Connect::Resource::ItemImage) }
     it { expect(item.category_id).to eq 'ITEM CATEGORY ID' }
     it { expect(item.category).to be_a(Square::Connect::Resource::Category) }
     it { expect(item.variations).to be_an(Array) }
@@ -47,11 +51,27 @@ RSpec.describe Square::Connect::Resource::Item do
       it { expect { subject }.to raise_error ArgumentError, 'Error parsing Item from nil' }
     end
 
-    context 'does not try to create an item image when the response does not contain one' do
+    context 'does not try to create a master image when the response does not contain one' do
       let(:master_image) { nil }
 
       it { expect { item }.to_not raise_error }
       it { expect(item.master_image).to be_nil }
+    end
+
+    context 'does not try to create an images array when the response does not contain one' do
+      context 'when nil' do
+        let(:images) { nil }
+
+        it { expect { item }.to_not raise_error }
+        it { expect(item.images).to eq [] }
+      end
+
+      context 'when array of nils' do
+        let(:images) { [nil, nil, nil] }
+
+        it { expect { item }.to_not raise_error }
+        it { expect(item.images).to eq [] }
+      end
     end
 
     context 'does not try to create a category when the response does not contain one' do
@@ -62,10 +82,19 @@ RSpec.describe Square::Connect::Resource::Item do
     end
 
     context 'does not try to create a variations when the response does not contain them' do
-      let(:variations) { [nil] }
+      context 'when nil' do
+        let(:variations) { nil }
 
-      it { expect { item }.to_not raise_error }
-      it { expect(item.variations).to eq [] }
+        it { expect { item }.to_not raise_error }
+        it { expect(item.variations).to eq [] }
+      end
+
+      context 'when array of nils' do
+        let(:variations) { [nil, nil, nil] }
+
+        it { expect { item }.to_not raise_error }
+        it { expect(item.variations).to eq [] }
+      end
     end
   end
 end
