@@ -13,6 +13,10 @@ class FakeSquareConnectApi < Sinatra::Base
       get '/items' do
         json_response 200, 'items.json'
       end
+
+      get '/items/:id' do
+        json_response 200, 'item.json'
+      end
     end
   end
 

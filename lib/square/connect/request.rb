@@ -9,7 +9,7 @@ module Square
         @api = api
       end
 
-      def get(path:)
+      def get(path:, resource_class:)
         http_response = nil
         uri = uri(path: path)
 
@@ -20,7 +20,7 @@ module Square
           http_response = http.request request # Net::HTTPResponse object
         end
 
-        Square::Connect::Response.new(http_response: http_response)
+        Square::Connect::Response.new(http_response: http_response, resource_class: resource_class)
       end
 
       def uri(path:)

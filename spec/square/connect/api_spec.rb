@@ -32,8 +32,26 @@ describe Square::Connect::Api do
   end
 
   describe 'items' do
-    let(:response) { api.items }
+    let(:items)         { api.items(include_image: include_image) }
+    let(:item)          { items.first }
+    let(:include_image) { false }
 
-    specify { expect(response).to be_ok }
+    specify { expect(items.size).to eq 1 }
+    specify { expect(items.first.class.name).to eq Square::Connect::Resource::Item.name }
+
+    describe 'include image' do
+      let(:images) { item.images }
+
+      context 'false' do
+        specify { expect(images).to be_nil }
+      end
+
+      context 'true' do
+        let(:include_image) { true }
+
+        specify { expect(images).not_to be_empty }
+        specify { expect(images.first).to be_a(Square::Connect::Resource::ItemImage) }
+      end
+    end
   end
 end
