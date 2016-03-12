@@ -2,6 +2,8 @@ module Square
   module Connect
     module Resource
       class Category
+        # https://docs.connect.squareup.com/api/connect/v1/#datatype-category
+
         attr_reader :id, :name
 
         def initialize(category)

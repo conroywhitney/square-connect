@@ -1,4 +1,4 @@
-RSpec.describe Square::Connect::Resource::Variation do
+RSpec.describe Square::Connect::Resource::ItemVariation do
   subject(:variation) { described_class.new(response_variation) }
   let(:response_variation) do
     {
@@ -32,7 +32,7 @@ RSpec.describe Square::Connect::Resource::Variation do
     context 'when response_variation is nil' do
       let(:response_variation) { nil }
 
-      it { expect { subject }.to raise_error ArgumentError, 'Error parsing Variation from nil' }
+      it { expect { subject }.to raise_error ArgumentError, 'Error parsing ItemVariation from nil' }
     end
   end
 end

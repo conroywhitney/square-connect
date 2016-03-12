@@ -23,7 +23,7 @@ RSpec.describe Square::Connect::Resource::Item do
     it { expect(item.fees).to be_an(Array) }
     it { expect(item.fees.first).to eq 'ITEM FEES' }
     it { expect(item.variations).to be_an(Array) }
-    it { expect(item.variations.first).to be_a(Square::Connect::Resource::Variation) }
+    it { expect(item.variations.first).to be_a(Square::Connect::Resource::ItemVariation) }
     it { expect(item.available_for_pickup).to eq 'ITEM PICKUP' }
     it { expect(item.available_online).to eq 'ITEM ONLINE' }
     it { expect(item.visibility).to eq 'ITEM VISIBILITY' }

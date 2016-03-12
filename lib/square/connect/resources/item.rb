@@ -2,6 +2,8 @@ module Square
   module Connect
     module Resource
       class Item
+        # https://docs.connect.squareup.com/api/connect/v1/#datatype-item
+
         attr_reader :id, :fees, :variations, :available_for_pickup, :available_online, :visibility,
                      :description, :name, :category_id, :category, :type
 
@@ -25,7 +27,7 @@ module Square
         private
 
         def parse_variation(variation)
-          variation ? Square::Connect::Resource::Variation.new(variation) : nil
+          variation ? Square::Connect::Resource::ItemVariation.new(variation) : nil
         end
 
         def parse_category(category)

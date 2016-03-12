@@ -1,11 +1,14 @@
 module Square
   module Connect
     module Resource
-      class Variation
+      class ItemVariation
+        # https://docs.connect.squareup.com/api/connect/v1/#datatype-itemvariation
+
         attr_reader :id, :name, :inventory_alert_type, :track_inventory, :pricing_type,
                     :price, :sku, :ordinal, :item_id
+
         def initialize(variation)
-          raise ArgumentError, 'Error parsing Variation from nil' unless variation
+          raise ArgumentError, 'Error parsing ItemVariation from nil' unless variation
 
           @id = variation['id']
           @name = variation['name']
