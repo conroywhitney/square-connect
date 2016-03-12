@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Square::Connect::Response do
-  subject(:response) { described_class.new(http_response: http_response) }
+  subject(:response) { described_class.new(http_response: http_response, resource: resource) }
 
   let(:http_response) { double(Net::HTTPOK, code: 200, body: response_body) }
   let(:response_body) { '' }
+  let(:resource)      { double }
 
   context 'minimum viable object' do
     specify { expect(response).to be_truthy }
@@ -45,6 +46,24 @@ describe Square::Connect::Response do
       it 'includes the expected values' do
         expect(response.data['FOO']).to eq 'BAR'
       end
+    end
+  end
+
+  describe 'resources' do
+    let(:response_body) { '[{ "foo": true }, { "bar": false }]' }
+
+    before { allow(resource).to receive(:new).and_return(double) }
+
+    it 'returns an array' do
+      expect(response.resources.is_a? Array).to eq true
+    end
+
+    it 'has the expected number of elements in it' do
+      expect(response.resources.size).to eq 2
+    end
+
+    it 'contains elements of resource type' do
+      expect(response.resources.map { |r| r.class.name }.uniq).to eq [resource.class.name]
     end
   end
 end

@@ -7,6 +7,7 @@ describe Square::Connect::Request do
   let(:access_token) { "ACCESS_TOKEN" }
   let(:location) { "LOCATION" }
   let(:path) { "/DUMMY" }
+  let(:resource) { double }
 
   context 'minimum viable object' do
     specify { expect(request).to be_truthy }
@@ -21,7 +22,7 @@ describe Square::Connect::Request do
   end
 
   describe 'get' do
-    let(:response) { request.get(path: path) }
+    let(:response) { request.get(path: path, resource: resource) }
 
     specify { expect(response).to be_ok }
   end

@@ -1,10 +1,11 @@
 module Square
   module Connect
     class Response
-      def initialize(http_response:)
+      def initialize(http_response:, resource:)
         fail 'Missing response' unless http_response
 
         @http_response = http_response
+        @resource = resource
       end
 
       def ok?
@@ -19,9 +20,13 @@ module Square
         JSON.parse(http_response.body)
       end
 
+      def resources
+        data.map { |d| resource.new(d) }
+      end
+
       private
 
-      attr_reader :http_response
+      attr_reader :http_response, :resource
     end
   end
 end

@@ -32,8 +32,9 @@ describe Square::Connect::Api do
   end
 
   describe 'items' do
-    let(:response) { api.items }
+    let(:items) { api.items }
 
-    specify { expect(response).to be_ok }
+    specify { expect(items.size).to eq 1 }
+    specify { expect(items.first.class.name).to eq Square::Connect::Resource::Item.name }
   end
 end

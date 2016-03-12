@@ -12,13 +12,13 @@ module Square
       end
 
       def items
-        get('/items')
+        get(path: '/items', resource: Square::Connect::Resource::Item)
       end
 
       private
 
-      def get(path)
-        Square::Connect::Request.new(api: self).get(path: path)
+      def get(path:, resource:)
+        Square::Connect::Request.new(api: self).get(path: path, resource: resource).resources
       end
     end
   end
