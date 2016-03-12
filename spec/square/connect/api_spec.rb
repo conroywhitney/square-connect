@@ -43,7 +43,7 @@ describe Square::Connect::Api do
       let(:images) { item.images }
 
       context 'false' do
-        specify { expect(images).to be_empty }
+        specify { expect(images).to be_nil }
       end
 
       context 'true' do

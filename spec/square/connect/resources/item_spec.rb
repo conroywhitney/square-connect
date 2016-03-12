@@ -50,51 +50,5 @@ RSpec.describe Square::Connect::Resource::Item do
 
       it { expect { subject }.to raise_error ArgumentError, 'Error parsing Item from nil' }
     end
-
-    context 'does not try to create a master image when the response does not contain one' do
-      let(:master_image) { nil }
-
-      it { expect { item }.to_not raise_error }
-      it { expect(item.master_image).to be_nil }
-    end
-
-    context 'does not try to create an images array when the response does not contain one' do
-      context 'when nil' do
-        let(:images) { nil }
-
-        it { expect { item }.to_not raise_error }
-        it { expect(item.images).to eq [] }
-      end
-
-      context 'when array of nils' do
-        let(:images) { [nil, nil, nil] }
-
-        it { expect { item }.to_not raise_error }
-        it { expect(item.images).to eq [] }
-      end
-    end
-
-    context 'does not try to create a category when the response does not contain one' do
-      let(:category) { nil }
-
-      it { expect { item }.to_not raise_error }
-      it { expect(item.category).to be_nil }
-    end
-
-    context 'does not try to create a variations when the response does not contain them' do
-      context 'when nil' do
-        let(:variations) { nil }
-
-        it { expect { item }.to_not raise_error }
-        it { expect(item.variations).to eq [] }
-      end
-
-      context 'when array of nils' do
-        let(:variations) { [nil, nil, nil] }
-
-        it { expect { item }.to_not raise_error }
-        it { expect(item.variations).to eq [] }
-      end
-    end
   end
 end

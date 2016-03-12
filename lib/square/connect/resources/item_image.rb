@@ -1,7 +1,7 @@
 module Square
   module Connect
     module Resource
-      class ItemImage
+      class ItemImage < BaseResource
         # https://docs.connect.squareup.com/api/connect/v1/#datatype-itemimage
 
         attr_reader \

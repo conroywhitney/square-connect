@@ -1,7 +1,7 @@
 module Square
   module Connect
     module Resource
-      class Category
+      class Category < BaseResource
         # https://docs.connect.squareup.com/api/connect/v1/#datatype-category
 
         attr_reader :id, :name

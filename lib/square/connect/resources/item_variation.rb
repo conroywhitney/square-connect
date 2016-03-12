@@ -1,7 +1,7 @@
 module Square
   module Connect
     module Resource
-      class ItemVariation
+      class ItemVariation < BaseResource
         # https://docs.connect.squareup.com/api/connect/v1/#datatype-itemvariation
 
         attr_reader :id, :name, :inventory_alert_type, :track_inventory, :pricing_type,

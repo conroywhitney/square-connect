@@ -1,7 +1,7 @@
 module Square
   module Connect
     module Resource
-      class Item
+      class Item < BaseResource
         # https://docs.connect.squareup.com/api/connect/v1/#datatype-item
 
         attr_reader \
@@ -34,43 +34,13 @@ module Square
           @visibility = item['visibility']
           @available_online = item['available_online']
           @available_for_pickup = item['available_for_pickup']
-          @master_image = parse_item_image(item['master_image'])
-          @images = parse_item_images(item['images'])
+          @master_image = Square::Connect::Resource::ItemImage.parse(item['master_image'])
+          @images = Square::Connect::Resource::ItemImage.parse(item['images'])
           @category_id = item['category_id']
-          @category = parse_category(item['category'])
-          @variations = parse_variations(item['variations'])
-          @modifier_lists = parse_modifier_lists(item['modifier_lists'])
-          @fees = parse_fees(item['fees'])
-        end
-
-        private
-
-        def parse_item_images(item_images)
-          item_images ? item_images.map(&method(:parse_item_image)).compact : []
-        end
-
-        def parse_item_image(item_image)
-          item_image ? Square::Connect::Resource::ItemImage.new(item_image) : nil
-        end
-
-        def parse_category(category)
-          category ? Square::Connect::Resource::Category.new(category) : nil
-        end
-
-        def parse_variations(variations)
-          variations ? variations.map(&method(:parse_variation)).compact : []
-        end
-
-        def parse_variation(variation)
-          variation ? Square::Connect::Resource::ItemVariation.new(variation) : nil
-        end
-
-        def parse_modifier_lists(modifier_lists)
-          nil
-        end
-
-        def parse_fees(fees)
-          nil
+          @category = Square::Connect::Resource::Category.parse(item['category'])
+          @variations = Square::Connect::Resource::ItemVariation.parse(item['variations'])
+          @modifier_lists = nil
+          @fees = nil
         end
       end
     end
