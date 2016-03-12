@@ -14,3 +14,5 @@ RSpec.configure do |config|
 end
 
 require 'square/connect'
+
+require 'byebug'
