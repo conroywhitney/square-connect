@@ -16,3 +16,4 @@ end
 require 'square/connect'
 
 require 'byebug'
+require 'awesome_print'
