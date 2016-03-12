@@ -5,6 +5,8 @@ module Square
         attr_reader :id, :name, :inventory_alert_type, :track_inventory, :pricing_type,
                     :price, :sku, :ordinal, :item_id
         def initialize(variation)
+          raise ArgumentError, 'Error parsing Variation from nil' unless variation
+
           @id = variation['id']
           @name = variation['name']
           @inventory_alert_type = variation['inventory_alert_type']

@@ -28,5 +28,11 @@ RSpec.describe Square::Connect::Resource::Variation do
     it { expect(variation.sku).to eq 'VARIATION SKU' }
     it { expect(variation.ordinal).to eq 'VARIATION ORDINAL' }
     it { expect(variation.item_id).to eq 'VARIATION ITEM ID' }
+
+    context 'when response_variation is nil' do
+      let(:response_variation) { nil }
+
+      it { expect { subject }.to raise_error ArgumentError, 'Error parsing Variation from nil' }
+    end
   end
 end

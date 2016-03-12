@@ -33,7 +33,21 @@ describe Square::Connect::Response do
     end
   end
 
+  describe 'message' do
+    context 'delegates to Net::HTTP message' do
+      let(:http_response) { double(Net::HTTPResponse, message: 'MESSAGE', body: response_body) }
+
+      specify { expect(response.message).to eq 'MESSAGE' }
+    end
+  end
+
   describe 'data' do
+    context 'when invalid request' do
+      let(:http_response) { double(Net::HTTPUnauthorized, code: 401, body: response_body) }
+
+      specify { expect(response.data).to be_nil }
+    end
+
     context 'with invalid JSON body' do
       it 'raises error if response body is not JSON' do
         expect { response.data }.to raise_exception JSON::ParserError
@@ -64,6 +78,12 @@ describe Square::Connect::Response do
 
     it 'contains elements of resource type' do
       expect(response.resources.map { |r| r.class.name }.uniq).to eq [resource.class.name]
+    end
+
+    context 'when invalid request' do
+      let(:http_response) { double(Net::HTTPUnauthorized, code: 401, body: response_body) }
+
+      specify { expect(response.resources).to be_nil }
     end
   end
 end

@@ -16,12 +16,16 @@ module Square
         http_response.code.to_i
       end
 
+      def message
+        http_response.message
+      end
+
       def data
-        JSON.parse(http_response.body)
+        JSON.parse(http_response.body) if ok?
       end
 
       def resources
-        data.map { |d| resource.new(d) }
+        data.map { |d| resource.new(d) } if data
       end
 
       private

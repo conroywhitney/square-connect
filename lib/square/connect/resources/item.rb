@@ -6,9 +6,12 @@ module Square
                      :description, :name, :category_id, :category, :type
 
         def initialize(item)
+          puts item
+          raise ArgumentError, 'Error parsing Item from nil' unless item
+
           @id = item['id']
           @fees = item['fees']
-          @variations = item['variations'].map(&method(:parse_variation))
+          @variations = item['variations'].map(&method(:parse_variation)).compact
           @available_for_pickup = item['available_for_pickup']
           @available_online = item['available_online']
           @visibility = item['visibility']
@@ -22,11 +25,11 @@ module Square
         private
 
         def parse_variation(variation)
-          Square::Connect::Resource::Variation.new(variation)
+          variation ? Square::Connect::Resource::Variation.new(variation) : nil
         end
 
         def parse_category(category)
-          Square::Connect::Resource::Category.new(category)
+          category ? Square::Connect::Resource::Category.new(category) : nil
         end
       end
     end
