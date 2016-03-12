@@ -1,5 +1,1 @@
-require 'square/connect/version'
-require 'square/connect/api'
-require 'square/connect/request'
-require 'square/connect/response'
-require 'square/connect/resources/item'
+Dir[File.join(File.dirname(__FILE__), 'connect', '**', '*.rb')].each { |filename| require filename }
